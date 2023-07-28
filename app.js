@@ -30,11 +30,21 @@ function logFormData(event) {
   deleteButton.textContent = "Delete";
   deleteButton.className = "deleteButton";
 
+  // Task 4 - Add Edit button and Edit functionality
+
+  let editButton = document.createElement("button");
+  editButton.textContent = "Edit";
+  editButton.className = "editButton";
+
   item.setAttribute("data-email", email);
 
   item.textContent = text;
+
   item.addEventListener("click", deleteUser);
+  editButton.addEventListener("click", editUser);
+
   item.appendChild(deleteButton);
+  item.appendChild(editButton);
   items.appendChild(item);
 
   document.getElementById("name").value = "";
@@ -45,10 +55,31 @@ function logFormData(event) {
 }
 
 function deleteUser(event) {
-  if (confirm("Are You Sure?")) {
+  if (event.target.classList.contains("deleteButton")) {
+    if (confirm("Are You Sure?")) {
+      let li = event.target.parentElement;
+      let email = li.getAttribute("data-email");
+      localStorage.removeItem(email);
+      li.remove();
+    }
+  }
+}
+
+// Task 4 - Edit button function
+
+function editUser(event) {
+  if (event.target.classList.contains("editButton")) {
     let li = event.target.parentElement;
     let email = li.getAttribute("data-email");
+    let userData = localStorage.getItem(email);
+    let user = JSON.parse(userData);
     localStorage.removeItem(email);
     li.remove();
+
+    document.getElementById("name").value = user.name;
+    document.getElementById("email").value = user.email;
+    document.getElementById("phno").value = user.phno;
+    document.getElementById("tfc-date").value = user.date;
+    document.getElementById("tfc-time").value = user.time;
   }
 }
