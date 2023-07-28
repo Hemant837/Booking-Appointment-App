@@ -6,11 +6,16 @@ function logFormData(event) {
   let date = document.getElementById("tfc-date").value;
   let time = document.getElementById("tfc-time").value;
 
-  localStorage.setItem("Name", name);
-  localStorage.setItem("Email", email);
-  localStorage.setItem("Phno", phno);
-  localStorage.setItem("Date", date);
-  localStorage.setItem("Time", time);
+  let user = {
+    name: name,
+    email: email,
+    phno: phno,
+    date: date,
+    time: time,
+  };
+
+  let userData = JSON.stringify(user);
+  localStorage.setItem("userData", userData);
 
   document.getElementById("name").value = "";
   document.getElementById("email").value = "";
