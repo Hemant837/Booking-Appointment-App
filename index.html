@@ -58,7 +58,7 @@
         width: 286px;
       }
 
-      button {
+      #submitButton {
         margin-top: 10px;
         background-color: orange;
         border: none;
@@ -68,6 +68,16 @@
         text-transform: uppercase;
         padding: 10px 0;
         width: 100%;
+        cursor: pointer;
+      }
+
+      .deleteButton {
+        background-color: red;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 10px;
+        padding: 5px;
         cursor: pointer;
       }
 
@@ -106,7 +116,9 @@
         <input type="date" id="tfc-date" name="date" required />
         <input type="time" id="tfc-time" name="time" required /><br />
 
-        <button onclick="logFormData(event)">Get a Call</button>
+        <button id="submitButton" onclick="logFormData(event)">
+          Get a Call
+        </button>
       </form>
     </div>
     <ul id="items-group"></ul>
