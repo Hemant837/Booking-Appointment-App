@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+        margin: 0;
+        background-image: url("1.jpg");
+        font-family: Arial, sans-serif;
+      }
+
+      #container {
+        border: 1px solid orange;
+        border-radius: 5px;
+        padding: 20px;
+        width: 600px;
+        background-color: white;
+      }
+
+      form {
+        margin: 10px 0;
+      }
+
+      h2,
+      p {
+        text-align: center;
+      }
+
+      p {
+        font-size: 0.8em;
+      }
+
+      h2 {
+        color: orange;
+        margin-bottom: 10px;
+      }
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      input {
+        height: 30px;
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      input[type="date"],
+      input[type="time"] {
+        width: 286px;
+      }
+
+      button {
+        margin-top: 10px;
+        background-color: orange;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 10px 0;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #ff8c00;
+      }
+
+      hr {
+        margin: 20px 0;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Page</title>
+  </head>
+  <body>
+    <div id="container">
+      <form id="registrationForm">
+        <h2>Book a Call</h2>
+        <p>
+          Book a call slot and our representative will call you within 1hr of
+          selected time.
+        </p>
+        <hr />
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required /><br />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required /><br />
+
+        <label for="phno">Phone:</label>
+        <input type="tel" id="phno" name="phone" required /><br />
+
+        <label for="tfc">Time for Call (Date):</label>
+        <input type="date" id="tfc-date" name="date" required />
+        <input type="time" id="tfc-time" name="time" required /><br />
+
+        <button onclick="logFormData(event)">Get a Call</button>
+      </form>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
