@@ -17,9 +17,17 @@ function logFormData(event) {
     time: time,
   };
 
-  let userData = JSON.stringify(user);
+  axios
+    .post(
+      "https://crudcrud.com/api/1a1019a4e1ce482e9e9445cc88df0d59/appointmentData",
+      user
+    )
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
 
-  localStorage.setItem(`${email}`, userData);
+  // let userData = JSON.stringify(user);
+
+  // localStorage.setItem(`${user.email}`, userData);
 
   let items = document.getElementById("items-group");
   let item = document.createElement("li");
