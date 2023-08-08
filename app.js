@@ -19,15 +19,11 @@ function logFormData(event) {
 
   axios
     .post(
-      "https://crudcrud.com/api/f9b6c9c9583546288bc43b6c3cdbf214/appointmentData",
+      "https://crudcrud.com/api/394f3167662f44b7a943abe22e308dbe/appointmentData",
       user
     )
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
-
-  // let userData = JSON.stringify(user);
-
-  // localStorage.setItem(`${user.email}`, userData);
 
   document.getElementById("name").value = "";
   document.getElementById("email").value = "";
@@ -37,14 +33,13 @@ function logFormData(event) {
 }
 
 function deleteUser(event) {
-  event.preventDefault();
   if (event.target.classList.contains("deleteButton")) {
     if (confirm("Are You Sure?")) {
       let li = event.target.parentElement;
       let userId = li.getAttribute("data-id");
       axios
         .delete(
-          `https://crudcrud.com/api/f9b6c9c9583546288bc43b6c3cdbf214/appointmentData/${userId}`
+          `https://crudcrud.com/api/394f3167662f44b7a943abe22e308dbe/appointmentData/${userId}`
         )
         .then((response) => {
           console.log(response);
@@ -60,23 +55,37 @@ function deleteUser(event) {
 function editUser(event) {
   if (event.target.classList.contains("editButton")) {
     let li = event.target.parentElement;
-    let email = li.getAttribute("data-email");
-    let userData = localStorage.getItem(email);
-    let user = JSON.parse(userData);
-    localStorage.removeItem(email);
+    let userId = li.getAttribute("data-id");
     li.remove();
-    document.getElementById("name").value = user.name;
-    document.getElementById("email").value = user.email;
-    document.getElementById("phno").value = user.phno;
-    document.getElementById("tfc-date").value = user.date;
-    document.getElementById("tfc-time").value = user.time;
+    axios
+      .get(
+        `https://crudcrud.com/api/394f3167662f44b7a943abe22e308dbe/appointmentData/${userId}`
+      )
+      .then((response) => {
+        document.getElementById("name").value = response.data.name;
+        document.getElementById("email").value = response.data.email;
+        document.getElementById("phno").value = response.data.phno;
+        document.getElementById("tfc-date").value = response.datadate;
+        document.getElementById("tfc-time").value = response.datatime;
+
+        let updateUSer = {
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          phno: document.getElementById("phno").value,
+          date: document.getElementById("tfc-date").value,
+          time: document.getElementById("tfc-time").value,
+        };
+        axios.delete(
+          `https://crudcrud.com/api/394f3167662f44b7a943abe22e308dbe/appointmentData/${userId}`
+        );
+      });
   }
 }
 
 window.addEventListener("DOMContentLoaded", () => {
   axios
     .get(
-      "https://crudcrud.com/api/f9b6c9c9583546288bc43b6c3cdbf214/appointmentData"
+      "https://crudcrud.com/api/394f3167662f44b7a943abe22e308dbe/appointmentData"
     )
     .then((response) => {
       console.log(response.data);
