@@ -29,22 +29,72 @@ function logFormData(event) {
 
   // localStorage.setItem(`${user.email}`, userData);
 
+  document.getElementById("name").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("phno").value = "";
+  document.getElementById("tfc-date").value = "";
+  document.getElementById("tfc-time").value = "";
+}
+
+function deleteUser(event) {
+  // if (event.target.classList.contains("deleteButton")) {
+  //   if (confirm("Are You Sure?")) {
+  //     let li = event.target.parentElement;
+  //     let email = li.getAttribute("data-email");
+  //     localStorage.removeItem(email);
+  //     li.remove();
+  //   }
+  // }
+}
+
+// Task 4 - Edit button function
+
+function editUser(event) {
+  // if (event.target.classList.contains("editButton")) {
+  //   let li = event.target.parentElement;
+  //   let email = li.getAttribute("data-email");
+  //   let userData = localStorage.getItem(email);
+  //   let user = JSON.parse(userData);
+  //   localStorage.removeItem(email);
+  //   li.remove();
+  //   document.getElementById("name").value = user.name;
+  //   document.getElementById("email").value = user.email;
+  //   document.getElementById("phno").value = user.phno;
+  //   document.getElementById("tfc-date").value = user.date;
+  //   document.getElementById("tfc-time").value = user.time;
+  // }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  axios
+    .get(
+      "https://crudcrud.com/api/1a1019a4e1ce482e9e9445cc88df0d59/appointmentData"
+    )
+    .then((response) => {
+      console.log(response);
+      for (var i = 0; i < response.data.length; i++) {
+        showUserOnScreen(response.data[i]);
+      }
+    })
+    .catch((err) => console.log(err));
+});
+
+function showUserOnScreen(user) {
   let items = document.getElementById("items-group");
   let item = document.createElement("li");
-  let text = `Patient name: ${name} Email: ${email} Phone: ${phno} Date: ${date} Time: ${time}`;
+  let text = `Patient name: ${user.name} Email: ${user.email} Phone: ${user.phno} Date: ${user.date} Time: ${user.time}`;
 
-  // Task 3 - Add a delete buton and delete functionality
+  // Delete buton
   let deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete";
   deleteButton.className = "deleteButton";
 
-  // Task 4 - Add Edit button and Edit functionality
-
+  // Edit button
   let editButton = document.createElement("button");
   editButton.textContent = "Edit";
   editButton.className = "editButton";
 
-  item.setAttribute("data-email", email);
+  item.setAttribute("data-email", user.email);
 
   item.textContent = text;
 
@@ -54,40 +104,4 @@ function logFormData(event) {
   item.appendChild(deleteButton);
   item.appendChild(editButton);
   items.appendChild(item);
-
-  document.getElementById("name").value = "";
-  document.getElementById("email").value = "";
-  document.getElementById("phno").value = "";
-  document.getElementById("tfc-date").value = "";
-  document.getElementById("tfc-time").value = "";
-}
-
-function deleteUser(event) {
-  if (event.target.classList.contains("deleteButton")) {
-    if (confirm("Are You Sure?")) {
-      let li = event.target.parentElement;
-      let email = li.getAttribute("data-email");
-      localStorage.removeItem(email);
-      li.remove();
-    }
-  }
-}
-
-// Task 4 - Edit button function
-
-function editUser(event) {
-  if (event.target.classList.contains("editButton")) {
-    let li = event.target.parentElement;
-    let email = li.getAttribute("data-email");
-    let userData = localStorage.getItem(email);
-    let user = JSON.parse(userData);
-    localStorage.removeItem(email);
-    li.remove();
-
-    document.getElementById("name").value = user.name;
-    document.getElementById("email").value = user.email;
-    document.getElementById("phno").value = user.phno;
-    document.getElementById("tfc-date").value = user.date;
-    document.getElementById("tfc-time").value = user.time;
-  }
 }
